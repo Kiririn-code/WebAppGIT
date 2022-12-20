@@ -1,0 +1,16 @@
+﻿@model CityViewModel
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr><th colspan="2">Hybrid controller Summary</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Cities:</th>
+            <td class="text-right"> @Model.Cities </td>
+        </tr>
+        <tr>
+            <th>Population</th>
+            <td class="text-right">@Model.Population.ToString("#,###")</td>
+        </tr>
+    </tbody>
+</table>

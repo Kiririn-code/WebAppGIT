@@ -1,0 +1,50 @@
+﻿@page "/pages/message"
+@model MessageModel
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using WebApp.Filters
+
+@if(Model.Message is string)
+            {
+                @Model.Message
+    }
+    else if(Model.Message is IDictionary<string, string>)
+    {
+        var dict = Model.Message as IDictionary<string, string>;
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in dict)
+                    {
+                        <tr>
+                            <td>@item.Key</td>
+                            <td>@item.Value</td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    }
+
+@functions{
+    [RequireHttps]
+        //[SimpleCache]
+        [ChangePageArgs]
+    public class MessageModel : PageModel
+    {
+
+        public object Message { get; set; } =
+        $"{DateTime.Now.ToLongTimeString()}: this is the message Razor Page";
+
+        public void OnGet(string message1, string message2 = "none")
+        {
+            Message = $"{message1} - {message2}";
+        }
+    }
+    }
